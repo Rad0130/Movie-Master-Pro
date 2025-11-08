@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { use } from 'react';
 import Navbar from '../../components/Header/Navbar';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../../Provider/AuthContext';
 
 const Login = () => {
+    const navigate=useNavigate();
+    const {signInUser}=use(AuthContext);
+    const handleSignIn=(e)=>{
+        e.preventDefault();
+        const email=e.target.email.value
+        const password=e.target.password.value
+        signInUser(email,password)
+        .then(result=>{
+            const user=result.user;
+            console.log(user);
+            navigate('/');
+        })
+
+    }
     return (
         <div>
             <div>
@@ -12,13 +27,13 @@ const Login = () => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <div className="card-body">
-                    <form>
+                    <form onSubmit={handleSignIn}>
                         <fieldset className="fieldset">
                             <h1 className='text-center font-bold text-3xl'>LogIn</h1>
                         <label className="label">Email</label>
-                        <input type="email" className="input" placeholder="Email" />
+                        <input type="email" className="input" name='email' placeholder="Email" />
                         <label className="label">Password</label>
-                        <input type="password" className="input" placeholder="Password" />
+                        <input type="password" className="input" name='password' placeholder="Password" />
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Login</button>
                         <button className="btn bg-white text-black border-[#e5e5e5]">

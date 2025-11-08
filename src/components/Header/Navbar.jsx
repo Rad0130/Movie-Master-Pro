@@ -1,7 +1,21 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { use } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../Provider/AuthContext';
 
 const Navbar = () => {
+    const navigate=useNavigate();
+    const {user,logOut}=use(AuthContext);
+
+    const handleLogout=()=>{
+        logOut()
+        .then(()=>{
+            alert("user Logged Out Successfully");
+            navigate('/login');
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
     const links=<>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allmovies'>All Movies</NavLink></li>
@@ -28,8 +42,10 @@ const Navbar = () => {
             </ul>
         </div>
         <div className="navbar-end flex gap-2">
-            <Link to='/login' className='btn bg-primary'>Login</Link>
-            <Link to='/register' className='btn bg-primary'>Register</Link>
+            {
+                user? <div className='flex items-center gap-2'><h1>{user.email}</h1><Link onClick={handleLogout} className='btn'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
+            <Link to='/register' className='btn bg-primary'>Register</Link></div>
+            }
         </div>
         </div>
     );

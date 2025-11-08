@@ -9,6 +9,7 @@ import AllMovies from './Pages/AllMovies/AllMovies';
 import MyCollections from './Pages/MyCollections/MyCollections';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import AuthProvider from './Provider/AuthProvider';
 
 
 const router = createBrowserRouter([
@@ -42,6 +43,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 )
