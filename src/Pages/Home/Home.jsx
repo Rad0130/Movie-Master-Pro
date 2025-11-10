@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from '../../components/banner/Carousel';
 import { useLoaderData } from 'react-router';
 import Genre from '../../components/Genre/Genre';
+import About from '../../components/About/About';
 
 const Home = () => {
     const allMovies=useLoaderData();
@@ -109,10 +110,12 @@ const Home = () => {
             ))}
             </section>
 
-            <h1 className='font-bold text-5xl text-center mt-20 mb-10'>Genres</h1>
+            <h1 className='font-bold text-5xl mt-20 mb-10'>Genres</h1>
             <section className='mb-20'>
                 <Genre key={allMovies._id} allMovies={allMovies}></Genre>
             </section>
+
+            <About></About>
 
 
         </div>

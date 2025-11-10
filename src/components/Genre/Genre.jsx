@@ -9,7 +9,7 @@ const Genre = ({allMovies}) => {
     }
 
     return (
-        <div className='grid grid-cols-7 gap-5'>
+        <div className='grid grid-cols-1 md:grid-cols-7 gap-5'>
             {
                 genres.map(genre=><div className='bg-black flex justify-center items-center p-20 rounded-xl text-red-900 font-bold text-3xl cursor-pointer hover:scale-105 transition-transform duration-300'>{genre}</div>)
             }
