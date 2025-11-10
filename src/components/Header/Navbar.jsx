@@ -22,7 +22,7 @@ const Navbar = () => {
         <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 shadow-sm border-b border-gray-500">
+        <div className="navbar bg-base-100 shadow-sm border-b border-gray-500 fixed top-0 left-0 right-0 z-50">
         <div className="navbar-start">
             <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,7 +52,7 @@ const Navbar = () => {
                 </ul>
                 </div>
                 
-                <Link onClick={handleLogout} className='px-4 py-2 rounded-xl cursor-pointer bg-red-900 font-bold'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
+                <Link onClick={handleLogout} className='px-4 py-2 rounded-[5px] cursor-pointer bg-red-900 font-bold'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
             <Link to='/register' className='btn bg-primary'>Register</Link></div>
             }
         </div>
