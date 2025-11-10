@@ -1,10 +1,11 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import Navbar from '../../components/Header/Navbar';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 
 const Register = () => {
-    const {createUser,signGoogle}=use(AuthContext);
+    const {createUser,signGoogle, setUser, updateUser}=use(AuthContext);
+    const [Error,setError]=useState('');
     const navigate=useNavigate();
     const handleRegister=(e)=>{
         e.preventDefault();
@@ -15,12 +16,20 @@ const Register = () => {
         console.log(name,photoUrl,email,password);
         createUser(email,password)
         .then(result=>{
-            const user=result.user;
-            console.log(user);
-            navigate('/');
+            const user=result.user
+            updateUser({displayName:name, photoURL:photoUrl})
+            .then(()=>{
+                setUser({...user, displayName:name, photoURL:photoUrl})
+                navigate('/')
+            })
+            .catch(error=>{
+                console.log(error)
+                setUser(user)
+            })
         })
         .catch(error=>{
-            console.log(error)
+            const ErrorMessage=error.code;
+            setError(ErrorMessage);
         })
     }
 

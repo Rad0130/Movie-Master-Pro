@@ -43,7 +43,16 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex gap-2">
             {
-                user? <div className='flex items-center gap-2'><h1>{user.email}</h1><Link onClick={handleLogout} className='btn'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
+                user? <div className='flex items-center gap-2'>
+                <div className="dropdown dropdown-start">
+                <div tabIndex={0} role="button" className="flex items-center"><img className='w-8 h-8 rounded-full cursor-pointer' src={user.photoURL} alt="Profile" /></div>
+                <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li><a>{user.displayName}</a></li>
+                    <li><a>{user.email}</a></li>
+                </ul>
+                </div>
+                
+                <Link onClick={handleLogout} className='btn bg-red-500'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
             <Link to='/register' className='btn bg-primary'>Register</Link></div>
             }
         </div>

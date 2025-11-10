@@ -5,7 +5,7 @@ import { AuthContext } from '../../Provider/AuthContext';
 
 const Login = () => {
     const navigate=useNavigate();
-    const {signInUser,signGoogle}=use(AuthContext);
+    const {signInUser,signGoogle, setUser}=use(AuthContext);
     const handleSignIn=(e)=>{
         e.preventDefault();
         const email=e.target.email.value
@@ -23,7 +23,7 @@ const Login = () => {
         signGoogle()
         .then(result=>{
             const user=result.user;
-            console.log(user);
+            setUser(user)
             navigate('/');
         })
         .catch(error=>{
