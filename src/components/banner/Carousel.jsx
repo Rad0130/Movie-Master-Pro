@@ -13,12 +13,17 @@ const Carousel = ({allMovies}) => {
                         <div key={movie._id || index}
                              id={`slide${index}`} 
                              className="carousel-item relative w-full">
-                        <img
-                        src={movie.posterUrl}
-                        className="w-full h-180 bg-cover" />
+                        <div className='w-full h-160 bg-cover flex items-end'
+                            style={{ backgroundImage: `url(${movie.posterUrl})` }}>
+                            <div className='space-y-3 ml-30 mb-20 w-200'>
+                                <div className='font-bold text-7xl text-red-900'>{movie.title}</div>
+                                <div className='font-bold'>{movie.plotSummary}</div>
+                                <button className='px-4 py-2 bg-red-900 rounded-xl cursor-pointer font-bold'>Watch Now</button>
+                            </div>
+                        </div>
                         <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                        <a href={`#slide${prevSlide}`} className="btn btn-circle">❮</a>
-                        <a href={`#slide${nextSlide}`} className="btn btn-circle">❯</a>
+                        <a href={`#slide${prevSlide}`} className="btn btn-circle bg-black">❮</a>
+                        <a href={`#slide${nextSlide}`} className="btn btn-circle bg-black">❯</a>
                         </div>
                         </div>
                     )

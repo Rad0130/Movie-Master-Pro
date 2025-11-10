@@ -17,12 +17,12 @@ const Navbar = () => {
         })
     }
     const links=<>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/allmovies'>All Movies</NavLink></li>
-        <li><NavLink to='/collections'>My Collection</NavLink></li>
+        <li className='font-bold'><NavLink to='/'>Home</NavLink></li>
+        <li className='font-bold'><NavLink to='/allmovies'>All Movies</NavLink></li>
+        <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100 shadow-sm border-b border-gray-500">
         <div className="navbar-start">
             <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,12 +47,12 @@ const Navbar = () => {
                 <div className="dropdown dropdown-start">
                 <div tabIndex={0} role="button" className="flex items-center"><img className='w-8 h-8 rounded-full cursor-pointer' src={user.photoURL} alt="Profile" /></div>
                 <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                    <li><a>{user.displayName}</a></li>
-                    <li><a>{user.email}</a></li>
+                    <li><a className='font-bold'>{user.displayName}</a></li>
+                    <li><a className='font-bold'>{user.email}</a></li>
                 </ul>
                 </div>
                 
-                <Link onClick={handleLogout} className='btn bg-red-500'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
+                <Link onClick={handleLogout} className='px-4 py-2 rounded-xl cursor-pointer bg-red-900 font-bold'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
             <Link to='/register' className='btn bg-primary'>Register</Link></div>
             }
         </div>
