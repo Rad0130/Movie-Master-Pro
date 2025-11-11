@@ -45,7 +45,7 @@ const Navbar = () => {
             {
                 user? <div className='flex items-center gap-2'>
                 <div className="dropdown dropdown-start">
-                <div tabIndex={0} role="button" className="flex items-center"><img className='w-8 h-8 rounded-full cursor-pointer' src={user.photoURL} alt="Profile" /></div>
+                <div tabIndex={0} role="button" className="flex items-center  mr-5"><img className='w-8 h-8 rounded-full cursor-pointer' src={user.photoURL} alt="Profile" /></div>
                 <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                     <li><a className='font-bold'>{user.displayName}</a></li>
                     <li><a className='font-bold'>{user.email}</a></li>

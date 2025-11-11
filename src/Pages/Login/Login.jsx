@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import Navbar from '../../components/Header/Navbar';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     const navigate=useNavigate();
@@ -16,6 +17,9 @@ const Login = () => {
             console.log(user);
             navigate('/');
         })
+        .catch(error=>{
+            toast(error)
+        })
 
     }
 
@@ -27,7 +31,7 @@ const Login = () => {
             navigate('/');
         })
         .catch(error=>{
-            console.log(error);
+            toast(error);
         })
     }
     return (
@@ -35,13 +39,13 @@ const Login = () => {
             <div>
                 <Navbar></Navbar>
             </div>
-            <div className="hero">
+            <div className="hero mt-20">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <div className="card-body">
                     <form onSubmit={handleSignIn}>
                         <fieldset className="fieldset">
-                            <h1 className='text-center font-bold text-3xl'>LogIn</h1>
+                            <h1 className='text-center font-bold text-3xl'>Login</h1>
                         <label className="label">Email</label>
                         <input type="email" className="input" name='email' placeholder="Email" />
                         <label className="label">Password</label>
@@ -55,6 +59,7 @@ const Login = () => {
                         <h1>Already have an account? <Link to='/register' className='text-blue-600'>Register</Link></h1>
                         </fieldset>
                     </form>
+                    <ToastContainer />
                 </div>
                 </div>
             </div>

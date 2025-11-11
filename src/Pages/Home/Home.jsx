@@ -14,19 +14,19 @@ const Home = () => {
     }
     return (
         <div>
-            <div className='mt-40 mb-10'>
+            <div className='mt-30 mb-10'>
                 <Carousel key={allMovies._id} allMovies={allMovies}></Carousel>
             </div>
             <section className='flex flex-col md:flex-row justify-between px-20 mb-20'>
-                <div className='text-center'>
+                <div className='text-center w-100 bg-black py-10 rounded-xl hover:scale-105 transition-transform duration-300'>
                     <h1 className='font-bold text-6xl'>{allMovies.length}</h1>
                     <p className='text-3xl'>Total Movies</p>
                 </div>
-                <div className='text-center'>
+                <div className='text-center w-100 bg-black py-10 rounded-xl hover:scale-105 transition-transform duration-300'>
                     <h1 className='font-bold text-6xl'>{users.length}</h1>
                     <p className='text-3xl'>Total Users</p>
                 </div>
-                <div className='text-center'>
+                <div className='text-center w-100 bg-black py-10 rounded-xl hover:scale-105 transition-transform duration-300'>
                     <h1 className='font-bold text-6xl'>8.5</h1>
                     <p className='text-3xl'>Top Rated Movies</p>
                 </div>
