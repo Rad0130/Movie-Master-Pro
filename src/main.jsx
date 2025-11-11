@@ -10,6 +10,8 @@ import MyCollections from './Pages/MyCollections/MyCollections';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import AuthProvider from './Provider/AuthProvider';
+import MovieDetails from './Pages/MovieDetails/MovieDetails';
+import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/allmovies',
+        loader:()=>fetch('http://localhost:3000/movies'),
         Component:AllMovies
       },
       {
@@ -31,6 +34,11 @@ const router = createBrowserRouter([
         Component:MyCollections
       }
     ]
+  },
+  {
+    path:'/details/:id',
+    loader:()=>fetch('http://localhost:3000/movies'),
+    element:<PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>
   },
   {
     path:'/login',

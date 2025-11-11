@@ -19,7 +19,7 @@ const Navbar = () => {
     const links=<>
         <li className='font-bold'><NavLink to='/'>Home</NavLink></li>
         <li className='font-bold'><NavLink to='/allmovies'>All Movies</NavLink></li>
-        <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>
+        {user && <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>}
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm border-b border-gray-500 fixed top-0 left-0 right-0 z-50">
@@ -34,7 +34,7 @@ const Navbar = () => {
                 {links}
             </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Movie Master</a>
+            <a className="font-bold text-xl"><span className='text-red-900'>Movie</span><span>Master</span></a>
         </div>
         <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">

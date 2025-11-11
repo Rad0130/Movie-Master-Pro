@@ -110,7 +110,7 @@ const Home = () => {
             ))}
             </section>
 
-            <h1 className='font-bold text-5xl mt-20 mb-10'>Genres</h1>
+            <h1 className='font-bold text-4xl mt-20 mb-10'>Genres</h1>
             <section className='mb-20'>
                 <Genre key={allMovies._id} allMovies={allMovies}></Genre>
             </section>
