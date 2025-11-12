@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Star, Clock, Calendar, Film, Users, Globe, MapPin, UserPlus } from 'lucide-react';
 import { useLoaderData, useParams } from 'react-router';
 import Navbar from '../../components/Header/Navbar';
+import { AuthContext } from '../../Provider/AuthContext';
 
 const MovieDetails = () => {
+    const {user}=use(AuthContext);
     const {id}=useParams();
     const movies=useLoaderData();
     const detailedMovie=movies.find(movie=>movie._id==id);
@@ -157,6 +159,16 @@ const MovieDetails = () => {
                     </div>
                 </div>
                 </div>
+                {
+                    user.email===addedBy && <div className="mt-auto flex justify-between gap-5">
+                            <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                            Edit
+                            </button>
+                            <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                            Delete
+                            </button>
+                    </div>
+                }
 
             </div>
             </div>

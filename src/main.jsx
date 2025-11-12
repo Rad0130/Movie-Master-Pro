@@ -31,10 +31,6 @@ const router = createBrowserRouter([
         Component:AllMovies
       },
       {
-        path:'/collections',
-        Component:MyCollections
-      },
-      {
         path:'/addmovies',
         element:<PrivateRoute><AddMovies></AddMovies></PrivateRoute>
       }
@@ -44,6 +40,10 @@ const router = createBrowserRouter([
     path:'/details/:id',
     loader:()=>fetch('http://localhost:3000/movies'),
     element:<PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>
+  },
+  {
+    path:'/collections',
+    Component:MyCollections
   },
   {
     path:'/login',
