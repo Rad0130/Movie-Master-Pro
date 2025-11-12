@@ -47,7 +47,7 @@ const MovieDetails = () => {
                         {/* Rating */}
                         <span className="flex items-center text-yellow-400 bg-gray-800/70 px-3 py-1 rounded-full">
                         <Star className="w-5 h-5 fill-yellow-400 mr-2" />
-                        {rating.toFixed(1)}/10
+                        {rating}/10
                         </span>
 
                         {/* Release Year */}

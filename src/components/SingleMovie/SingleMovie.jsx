@@ -3,7 +3,7 @@ import { Star, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
 
 const SingleMovie = ({movie}) => {
-    const {title, posterUrl, rating, genre, releaseYear}=movie;
+    const {_id, title, posterUrl, rating, genre, releaseYear}=movie;
     return (
         <div className="
       max-w-xs w-full
@@ -32,7 +32,7 @@ const SingleMovie = ({movie}) => {
         {/* Rating Overlay Badge */}
         <div className="absolute top-3 right-3 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-full flex items-center shadow-lg">
           <Star className="w-4 h-4 mr-1 fill-yellow-400 stroke-yellow-400" />
-          {rating.toFixed(1)}
+          {rating}
         </div>
       </div>
 
@@ -49,7 +49,7 @@ const SingleMovie = ({movie}) => {
         </div>
 
         {/* Details Button */}
-        <Link to={`/details/${movie._id}`}
+        <Link to={`/details/${_id}`}
           className="
             w-full
             flex items-center justify-center

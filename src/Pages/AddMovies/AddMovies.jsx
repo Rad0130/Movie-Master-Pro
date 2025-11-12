@@ -1,10 +1,59 @@
 import { PlusCircle } from 'lucide-react';
-import React from 'react';
+import React, { use } from 'react';
+import { AuthContext } from '../../Provider/AuthContext';
 
 const AddMovies = () => {
+    const {user}=use(AuthContext);
+    const handleMovieSubmit=(e)=>{
+        e.preventDefault();
+        const title=e.target.title.value;
+        const director=e.target.director.value;
+        const cast=e.target.cast.value;
+        const posterUrl=e.target.posterUrl.value;
+        const releaseYear=e.target.releaseYear.value;
+        const genre=e.target.genre.value;
+        const duration=e.target.duration.value;
+        const rating=e.target.rating.value;
+        const language=e.target.language.value;
+        const country=e.target.country.value;
+        const plotSummary=e.target.plotSummary.value;
+        const addedBy=e.target.addedBy.value;
+
+        console.log(title,director,cast,posterUrl,releaseYear,genre,duration,rating,language,country,plotSummary,addedBy);
+
+        const newMovie={
+            title:title,
+            director:director,
+            cast:cast,
+            posterUrl:posterUrl,
+            releaseYear:releaseYear,
+            genre:genre,
+            duration:duration,
+            rating:rating,
+            language:language,
+            country:country,
+            plotSummary:plotSummary,
+            addedBy:addedBy
+        }
+
+        //send data to the database
+        fetch('http://localhost:3000/movies',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(newMovie)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log('new movie added',data);
+            alert('Movie added successfully!');
+            e.target.reset();
+        })
+    }
     return (
         <div className='mt-30 mb-15 bg-black rounded-2xl'>
-            <form class="space-y-6 p-10">
+            <form onSubmit={handleMovieSubmit} class="space-y-6 p-10">
                 <div className='flex items-center border-b-2 border-red-900 pb-4'>
                     <PlusCircle className="w-8 h-8 mr-3 text-red-600" />
                     <h1 className='font-bold text-4xl'>Add New Movie here</h1>
@@ -92,7 +141,8 @@ const AddMovies = () => {
 
             <div class="flex flex-col">
                 <label for="addedBy" class="mb-2 text-sm font-medium text-gray-300">Added By (Email/Username) <span class="text-red-500">*</span></label>
-                <input id="addedBy" name="addedBy" type="email" placeholder="anonymous@movielib.com" required
+                <input id="addedBy" name="addedBy" type="email"  
+                defaultValue={user.email} required
                 class="w-full bg-zinc-800 text-white border border-zinc-700 focus:border-red-600 focus:ring-red-600 rounded-lg p-3 transition-colors placeholder-gray-500" />
             </div>
 

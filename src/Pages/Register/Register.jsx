@@ -30,16 +30,35 @@ const Register = () => {
         }
         createUser(email,password)
         .then(result=>{
-            const user=result.user
+            const user=result.user;
             updateUser({displayName:name, photoURL:photoUrl})
             .then(()=>{
-                setUser({...user, displayName:name, photoURL:photoUrl})
-                navigate('/')
+                const newUser={
+                name:result.user.displayName,
+                email:result.user.email,
+                image:result.user.photoURL
+            };
+
+            //create user in the database
+            fetch('http://localhost:3000/users',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(newUser)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log('data after save to database',data);
+                setUser({...user, displayName:name, photoURL:photoUrl});
+                navigate('/');
+            })
+                
             })
             .catch(error=>{
-                console.log(error)
-                setUser(user)
-                toast(error);
+                const ErrorMessage=error.code;
+                setError(ErrorMessage);
+                toast(ErrorMessage);
 
             })
         })
@@ -55,6 +74,24 @@ const Register = () => {
         .then(result=>{
             const user=result.user;
             console.log(user);
+            const newUser={
+                name:result.user.displayName,
+                email:result.user.email,
+                image:result.user.photoURL
+            }
+
+            //create user in the database
+            fetch('http://localhost:3000/users',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(newUser)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log('data after save to database',data);
+            })
             navigate('/');
         })
         .catch(error=>{
@@ -74,7 +111,7 @@ const Register = () => {
                 <div className="card-body">
                     <form onSubmit={handleRegister}>
                         <fieldset className="fieldset">
-                            <h1 className='text-center font-bold text-3xl'>Register</h1>
+                            <h1 className='text-center font-bold text-3xl px-25'>Register</h1>
                         <label className="label">Name</label>
                         <input type="text" className="input" name='name' placeholder="Write Your Name" required />
                         <label className="label">Photo URL</label>

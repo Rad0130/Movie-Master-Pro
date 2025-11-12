@@ -51,7 +51,7 @@ const Login = () => {
                 <div className="card-body">
                     <form onSubmit={handleSignIn}>
                         <fieldset className="fieldset">
-                            <h1 className='text-center font-bold text-3xl'>Login</h1>
+                            <h1 className='text-center font-bold text-3xl px-30'>Login</h1>
                         <label className="label">Email</label>
                         <input type="email" className="input" name='email' placeholder="Email" />
                         <label className="label">Password</label>
