@@ -19,8 +19,6 @@ const AddMovies = () => {
         const plotSummary=e.target.plotSummary.value;
         const addedBy=e.target.addedBy.value;
 
-        console.log(title,director,cast,posterUrl,releaseYear,genre,duration,rating,language,country,plotSummary,addedBy);
-
         const newMovie={
             title:title,
             director:director,
