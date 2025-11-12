@@ -1,4 +1,4 @@
-import React, { Suspense, use, useState } from 'react';
+import React, { use, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthContext';
 import Loading from '../Loading/Loading';
 import Navbar from '../../components/Header/Navbar';
@@ -29,6 +29,21 @@ const MyCollections = () => {
         setLoading(false);
     })
 
+    const handleDelete=(id)=>{
+        fetch(`http://localhost:3000/movies/${id}`,{
+            method:'DELETE',
+            headers:{
+                'content_type':"application/json"
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log('deleted',data);
+            alert('Movie deleted Successfully');
+
+        })
+    }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -46,7 +61,7 @@ const MyCollections = () => {
                             src={movie.posterUrl}
                             alt={`${movie.title} Poster`}
                         />
-                        <div className="flex flex-col flex-grow p-4">
+                        <div className="flex flex-col grow p-4">
                             <div className="flex justify-between items-center mb-2">
                             <h2 className="text-2xl font-bold tracking-wide">{movie.title}</h2>
                             <span className="text-lg font-semibold text-red-500">{movie.rating}</span>
@@ -66,7 +81,7 @@ const MyCollections = () => {
                                     <Link to={`/update/${movie._id}`} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer text-center">
                                     Edit
                                     </Link>
-                                    <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                                    <button onClick={()=>handleDelete(movie._id)} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
                                     Delete
                                     </button>
                             </div>

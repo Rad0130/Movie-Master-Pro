@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import Loading from '../Loading/Loading';
 
 const Update = () => {
     const movies=useLoaderData();
     const {id}=useParams();
+    const [loading,setLoading]=useState(false);
     const movieInfo=movies.find(mv=>mv._id===id);
     const {title, director, cast, posterUrl, releaseYear, genre, duration, rating, language, country, plotSummary, addedBy}=movieInfo;
     
     //update movie and save to database
     const handleMovieUpdate=(e)=>{
         e.preventDefault();
+        setLoading(true);
         const updatedTitle=e.target.title.value;
         const updatedDirector=e.target.director.value;
         const updatedCast=e.target.cast.value;
@@ -48,8 +51,12 @@ const Update = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log('movie updated',data);
+            setLoading(false);
             alert('Movie updated successfully!');
         })
+    }
+    if(loading){
+        return <Loading></Loading>
     }   
     return (
         <div className='mt-30 mb-15 bg-black rounded-2xl'>

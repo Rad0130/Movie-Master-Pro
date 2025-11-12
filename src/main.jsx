@@ -23,12 +23,10 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        loader:()=>fetch('http://localhost:3000/movies'),
         Component:Home
       },
       {
         path:'/allmovies',
-        loader:()=>fetch('http://localhost:3000/movies'),
         Component:AllMovies
       },
       {

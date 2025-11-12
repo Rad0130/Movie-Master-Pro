@@ -1,10 +1,11 @@
 import React, { use } from 'react';
 import { Star, Clock, Calendar, Film, Users, Globe, MapPin, UserPlus } from 'lucide-react';
-import { Link, useLoaderData, useParams } from 'react-router';
+import { Link, useLoaderData, useNavigate, useParams } from 'react-router';
 import Navbar from '../../components/Header/Navbar';
 import { AuthContext } from '../../Provider/AuthContext';
 
 const MovieDetails = () => {
+    const navigate=useNavigate();
     const {user}=use(AuthContext);
     const {id}=useParams();
     const movies=useLoaderData();
@@ -23,6 +24,8 @@ const MovieDetails = () => {
         .then(data=>{
             console.log('movie deleted',data);
             alert('Movie deleted successfully!');
+            navigate('/allmovies');
+
         })
     }
     return (
@@ -175,7 +178,7 @@ const MovieDetails = () => {
                 </div>
                 {
                     user.email===addedBy && <div className="mt-auto flex justify-between gap-5">
-                            <Link to={`/update/${id}`} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                            <Link to={`/update/${id}`} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold text-center py-2 rounded-lg transition-colors duration-200 cursor-pointer">
                             Edit
                             </Link>
                             <button onClick={handleDelete} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">

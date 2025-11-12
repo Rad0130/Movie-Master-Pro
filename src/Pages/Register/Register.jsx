@@ -3,14 +3,17 @@ import Navbar from '../../components/Header/Navbar';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
+import Loading from '../Loading/Loading';
 
 const Register = () => {
     const {createUser,signGoogle, setUser, updateUser}=use(AuthContext);
     const [Error,setError]=useState('');
     const [passwordError,setPasswordError]=useState("");
+    const [loading,setLoading]=useState(false);
     const navigate=useNavigate();
     const handleRegister=(e)=>{
         e.preventDefault();
+        setLoading(true);
         const name=e.target.name.value
         const photoUrl=e.target.image.value
         const email=e.target.email.value
@@ -51,6 +54,7 @@ const Register = () => {
             .then(data=>{
                 console.log('data after save to database',data);
                 setUser({...user, displayName:name, photoURL:photoUrl});
+                setLoading(false);
                 navigate('/');
             })
                 
@@ -99,6 +103,9 @@ const Register = () => {
             setError(ErrorMessage);
             toast(ErrorMessage);
         })
+    }
+    if(loading){
+        return <Loading></Loading>
     }
     return (
         <div>

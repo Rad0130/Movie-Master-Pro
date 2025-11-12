@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from '../../components/banner/Carousel';
-import { useLoaderData } from 'react-router';
 import Genre from '../../components/Genre/Genre';
 import About from '../../components/About/About';
+import Loading from '../Loading/Loading';
 
 const Home = () => {
-    const allMovies=useLoaderData();
+    const [allMovies,setAllMovies]=useState([]);
+    const [loading,setLoading]=useState(true);
     const users=[]
     for(const movie of allMovies){
         if(!users.includes(movie.addedBy)){
             users.push(movie.addedBy);
         }
+    }
+
+    useEffect(()=>{
+        setLoading(true);
+        fetch('http://localhost:3000/movies')
+        .then(res=>res.json())
+        .then(data=>{
+            setAllMovies(data);
+            setLoading(false);
+        })
+        .catch(error=>{
+            console.log(error);
+            setLoading(false);
+        })
+    },[])
+
+    if(loading){
+        return <Loading></Loading>
     }
     return (
         <div>

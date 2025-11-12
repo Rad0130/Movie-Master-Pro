@@ -3,20 +3,24 @@ import Navbar from '../../components/Header/Navbar';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
+import Loading from '../Loading/Loading';
 
 const Login = () => {
     const navigate=useNavigate();
     const location=useLocation();
     const [Error,setError]=useState('');
+    const [loading,setLoading]=useState(false);
     const {signInUser,signGoogle, setUser}=use(AuthContext);
     const handleSignIn=(e)=>{
         e.preventDefault();
+        setLoading(true);
         const email=e.target.email.value
         const password=e.target.password.value
         signInUser(email,password)
         .then(result=>{
             const user=result.user;
             console.log(user);
+            setLoading(false);
             navigate(`${location.state? location.state : '/'}`);
         })
         .catch(error=>{
@@ -39,6 +43,10 @@ const Login = () => {
             toast(Error)
             setError
         })
+    }
+
+    if(loading){
+        return <Loading></Loading>
     }
     return (
         <div>

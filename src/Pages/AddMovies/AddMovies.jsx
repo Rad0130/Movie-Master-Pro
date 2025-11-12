@@ -1,11 +1,14 @@
 import { PlusCircle } from 'lucide-react';
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthContext';
+import Loading from '../Loading/Loading';
 
 const AddMovies = () => {
     const {user}=use(AuthContext);
+    const [loading,setLoading]=useState(false);
     const handleMovieSubmit=(e)=>{
         e.preventDefault();
+        setLoading(true);
         const title=e.target.title.value;
         const director=e.target.director.value;
         const cast=e.target.cast.value;
@@ -45,9 +48,13 @@ const AddMovies = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log('new movie added',data);
+            setLoading(false);
             alert('Movie added successfully!');
             e.target.reset();
         })
+    }
+    if(loading){
+        return <Loading></Loading>
     }
     return (
         <div className='mt-30 mb-15 bg-black rounded-2xl'>
