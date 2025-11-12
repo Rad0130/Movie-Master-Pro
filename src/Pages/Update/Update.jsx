@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Loading from '../Loading/Loading';
+import swal from 'sweetalert';
+
 
 const Update = () => {
     const movies=useLoaderData();
@@ -52,7 +54,7 @@ const Update = () => {
         .then(data=>{
             console.log('movie updated',data);
             setLoading(false);
-            alert('Movie updated successfully!');
+            swal("Good job!", "Movie updated successfully!", "success");
         })
     }
     if(loading){

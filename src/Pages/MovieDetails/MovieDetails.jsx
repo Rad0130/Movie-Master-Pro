@@ -3,6 +3,8 @@ import { Star, Clock, Calendar, Film, Users, Globe, MapPin, UserPlus } from 'luc
 import { Link, useLoaderData, useNavigate, useParams } from 'react-router';
 import Navbar from '../../components/Header/Navbar';
 import { AuthContext } from '../../Provider/AuthContext';
+import swal from 'sweetalert';
+
 
 const MovieDetails = () => {
     const navigate=useNavigate();
@@ -23,7 +25,7 @@ const MovieDetails = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log('movie deleted',data);
-            alert('Movie deleted successfully!');
+            swal("Done!", "You Deleted the Movie Successfully!", "success");
             navigate('/allmovies');
 
         })

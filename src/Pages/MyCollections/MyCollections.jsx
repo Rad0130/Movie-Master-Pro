@@ -4,6 +4,8 @@ import Loading from '../Loading/Loading';
 import Navbar from '../../components/Header/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router';
+import swal from 'sweetalert';
+
 
 const MyCollections = () => {
     const {user}=use(AuthContext);
@@ -39,7 +41,7 @@ const MyCollections = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log('deleted',data);
-            alert('Movie deleted Successfully');
+            swal("Done!", "You Deleted the Movie Successfully!", "success");
 
         })
     }

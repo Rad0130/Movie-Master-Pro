@@ -14,12 +14,15 @@ import MovieDetails from './Pages/MovieDetails/MovieDetails';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 import AddMovies from './Pages/AddMovies/AddMovies';
 import Update from './Pages/Update/Update';
+import ErrorPage from './Pages/ErrorPage/ErrorPage';
+import ErrorBoundary from './Pages/ErrorPage/ErrorBoundary';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component:HomepageLayout,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       {
         path:"/",
@@ -47,7 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/collections',
-    Component:MyCollections
+    element:<PrivateRoute><MyCollections></MyCollections></PrivateRoute>
   },
   {
     path:'/login',
@@ -56,13 +59,19 @@ const router = createBrowserRouter([
   {
     path:'/register',
     Component:Register
+  },
+  {
+    path:'/error',
+    Component:ErrorPage
   }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
+    </ErrorBoundary>
   </StrictMode>
 )

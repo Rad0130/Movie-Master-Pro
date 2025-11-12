@@ -2,6 +2,7 @@ import { PlusCircle } from 'lucide-react';
 import React, { use, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthContext';
 import Loading from '../Loading/Loading';
+import swal from 'sweetalert';
 
 const AddMovies = () => {
     const {user}=use(AuthContext);
@@ -49,7 +50,7 @@ const AddMovies = () => {
         .then(data=>{
             console.log('new movie added',data);
             setLoading(false);
-            alert('Movie added successfully!');
+            swal("Good job!", "Movie added successfully!", "success");
             e.target.reset();
         })
     }
