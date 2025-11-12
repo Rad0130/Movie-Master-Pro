@@ -1,6 +1,6 @@
 import React, { use } from 'react';
 import { Star, Clock, Calendar, Film, Users, Globe, MapPin, UserPlus } from 'lucide-react';
-import { useLoaderData, useParams } from 'react-router';
+import { Link, useLoaderData, useParams } from 'react-router';
 import Navbar from '../../components/Header/Navbar';
 import { AuthContext } from '../../Provider/AuthContext';
 
@@ -11,6 +11,20 @@ const MovieDetails = () => {
     const detailedMovie=movies.find(movie=>movie._id==id);
     const {title,genre,releaseYear,director,cast,rating,duration,plotSummary,posterUrl,language,country,addedBy}=detailedMovie;
     const castList = cast.split(',').map(item => item.trim());
+
+    const handleDelete=()=>{
+        fetch(`http://localhost:3000/movies/${id}`,{
+            method:'DELETE',
+            headers:{
+                'content-type':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log('movie deleted',data);
+            alert('Movie deleted successfully!');
+        })
+    }
     return (
         <div className='w-8/10 mx-auto'>
             <div className='mb-15'>
@@ -161,10 +175,10 @@ const MovieDetails = () => {
                 </div>
                 {
                     user.email===addedBy && <div className="mt-auto flex justify-between gap-5">
-                            <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                            <Link to={`/update/${id}`} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
                             Edit
-                            </button>
-                            <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                            </Link>
+                            <button onClick={handleDelete} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
                             Delete
                             </button>
                     </div>

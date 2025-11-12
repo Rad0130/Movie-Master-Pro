@@ -3,6 +3,7 @@ import { AuthContext } from '../../Provider/AuthContext';
 import Loading from '../Loading/Loading';
 import Navbar from '../../components/Header/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { Link } from 'react-router';
 
 const MyCollections = () => {
     const {user}=use(AuthContext);
@@ -62,9 +63,9 @@ const MyCollections = () => {
                             <span className="font-semibold text-white">{movie.director}</span>
                             </p>
                             <div className="mt-auto flex justify-between gap-5">
-                                    <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
+                                    <Link to={`/update/${movie._id}`} className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer text-center">
                                     Edit
-                                    </button>
+                                    </Link>
                                     <button className="w-full bg-red-900 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 cursor-pointer">
                                     Delete
                                     </button>

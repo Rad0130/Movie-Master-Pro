@@ -13,6 +13,7 @@ import AuthProvider from './Provider/AuthProvider';
 import MovieDetails from './Pages/MovieDetails/MovieDetails';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 import AddMovies from './Pages/AddMovies/AddMovies';
+import Update from './Pages/Update/Update';
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path:'/addmovies',
         element:<PrivateRoute><AddMovies></AddMovies></PrivateRoute>
+      },
+      {
+        path:'/update/:id',
+        loader:()=>fetch('http://localhost:3000/movies'),
+        Component:Update
       }
     ]
   },
