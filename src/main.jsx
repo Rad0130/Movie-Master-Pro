@@ -30,6 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/allmovies',
+        loader:()=>fetch('http://localhost:3000/movies'),
         Component:AllMovies
       },
       {
