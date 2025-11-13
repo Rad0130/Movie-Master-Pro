@@ -10,7 +10,6 @@ const WatchList = () => {
     const [wishlistID, setWishlistID] = useState([]);
     const [wishedMovies, setWishedMovies] = useState([]);
 
-    // 🧩 Fetch wishlist IDs for the logged-in user
     useEffect(() => {
         if (!user?.email) return;
 
@@ -25,7 +24,6 @@ const WatchList = () => {
             .catch(err => console.error('Error fetching wishlist:', err));
     }, [user?.email]);
 
-    // 🎬 Get movies that match those wishlist IDs
     useEffect(() => {
         if (wishlistID.length > 0 && allMovies.length > 0) {
             const matchedMovies = allMovies.filter(movie =>

@@ -72,16 +72,18 @@ const AllMovies = () => {
     return (
         <div className='mt-30'>
             <h1 className='font-bold text-4xl'>All Movies</h1>
-            <div className='flex gap-2 mt-5'>
+            <div className='gird grid-cols-4 md:grid-cols-15 mt-5'>
                 {
-                    genres.map(genre=><button onClick={()=>handleGenreButton(genre)} className={`btn btn-outline ${selectedGenres.includes(genre)?'bg-red-800':'btn-secondary'}`}>{genre}</button>)
+                    genres.map(genre=><button onClick={()=>handleGenreButton(genre)} className={`btn btn-outline m-2 ${selectedGenres.includes(genre)?'bg-red-800':'btn-secondary'}`}>{genre}</button>)
                 }
             </div>
-            <div className='mt-5'>
-                <label className='px-4 py-2 bg-red-800 rounded-[5px] font-bold mr-4'>Rating Range: </label>
-                <input className='text-center text-red-800 font-bold border border-red-800 rounded-[5px]' type="number" step={0.1} min={0} max={10} value={minRating} placeholder='min' onChange={(e)=>setMinRating(e.target.value)} />
-                <span className='mx-2 font-bold'>to</span>
-                <input className='text-center text-red-800 font-bold border border-red-800 rounded-[5px]' type="number" step={0.1} min={0} max={10} value={maxRating} placeholder='Max' onChange={(e)=>setMaxRating(e.target.value)} />
+            <div className='mt-5 flex flex-col md:flex-row items-center '>
+                <label className='px-4 py-2 bg-red-800 rounded-[5px] font-bold mr-4 mb-4 md:mb-0'>Rating Range: </label>
+                <div className='flex flex-col md:flex-row'>
+                    <input className='text-center text-red-800 font-bold border border-red-800 rounded-[5px]' type="number" step={0.1} min={0} max={10} value={minRating} placeholder='min' onChange={(e)=>setMinRating(e.target.value)} />
+                    <span className='mx-2 font-bold text-center'>to</span>
+                    <input className='text-center text-red-800 font-bold border border-red-800 rounded-[5px]' type="number" step={0.1} min={0} max={10} value={maxRating} placeholder='Max' onChange={(e)=>setMaxRating(e.target.value)} />
+                </div>
             </div>
             <div className='grid geid-cols-1 md:grid-cols-5 gap-5 my-10'>
                 {

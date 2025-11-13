@@ -20,7 +20,7 @@ const Navbar = () => {
     const handletheme=(checked)=>{
         const html=document.querySelector('html');
         if(checked){
-            html.setAttribute('data-theme','light')
+            html.setAttribute('data-theme','gray')
         }
         else{
             html.setAttribute('data-theme','dark')
@@ -59,16 +59,17 @@ const Navbar = () => {
         <div className="navbar-end flex gap-2">
             {
                 user? <div className='flex items-center gap-2'>
-                <div className="dropdown dropdown-start">
+                <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="flex items-center  mr-5"><img className='w-8 h-8 rounded-full cursor-pointer' src={user.photoURL} alt="Profile" /></div>
-                <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-4 shadow-sm">
                     <li><a className='font-bold'>{user.displayName}</a></li>
                     <li><a className='font-bold'>{user.email}</a></li>
+                    <Link onClick={handleLogout} className='px-4 py-2 rounded-[5px] cursor-pointer bg-red-900 font-bold'>Logout</Link>
                 </ul>
                 </div>
                 
-                <Link onClick={handleLogout} className='px-4 py-2 rounded-[5px] cursor-pointer bg-red-900 font-bold'>Logout</Link></div>:<div><Link to='/login' className='btn bg-primary'>Login</Link>
-            <Link to='/register' className='btn bg-primary'>Register</Link></div>
+                </div>:<div><Link to='/login' className='btn bg-red-800'>Login</Link>
+            <Link to='/register' className='btn bg-red-800'>Register</Link></div>
             }
         </div>
         </div>
