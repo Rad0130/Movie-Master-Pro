@@ -16,11 +16,22 @@ const Navbar = () => {
             console.log(error);
         })
     }
+
+    const handletheme=(checked)=>{
+        const html=document.querySelector('html');
+        if(checked){
+            html.setAttribute('data-theme','light')
+        }
+        else{
+            html.setAttribute('data-theme','dark')
+        }
+    }
     const links=<>
         <li className='font-bold'><NavLink to='/'>Home</NavLink></li>
         <li className='font-bold'><NavLink to='/allmovies'>All Movies</NavLink></li>
         <li className='font-bold'><NavLink to='/addmovies'>Add Movies</NavLink></li>
-        {user && <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>}   
+        {user && <li className='font-bold'><NavLink to='/collections'>My Collection</NavLink></li>}
+        {user && <li className='font-bold'><NavLink to='/watch'>My WatchList</NavLink></li>}    
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm border-b border-gray-500 fixed top-0 left-0 right-0 z-50 max-w-[1652px] mx-auto">
@@ -35,7 +46,10 @@ const Navbar = () => {
                 {links}
             </ul>
             </div>
-            <a className="font-bold text-2xl"><span className='text-red-900'>Movie</span><span>Master</span></a>
+            <div className='flex items-center gap-4'>
+                <a className="font-bold text-2xl"><span className='text-red-900'>Movie</span><span>Master</span></a>
+                <input onClick={(e)=>handletheme(e.target.checked)} type="checkbox" defaultChecked={localStorage.getItem('theme')==="dark"} className="toggle theme-controller" />
+            </div>
         </div>
         <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">

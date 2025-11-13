@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Star, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../Provider/AuthContext';
+import swal from 'sweetalert';
+
 
 const SingleMovie = ({movie}) => {
+  const {user}=use(AuthContext);
     const {_id, title, posterUrl, rating, genre, releaseYear}=movie;
+
+
+    //watchlist to the database
+    const handleWatchList=()=>{
+      const newWatchList={
+          movieId:_id,
+          requestEmail:user.email,
+      }
+      fetch('http://localhost:3000/watchList',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(newWatchList)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log('watchlist added',data)
+        swal("OK!", "WatchList Added Successfully!", "success");
+      })
+    }
     return (
         <div className="
       max-w-xs w-full
@@ -48,22 +73,34 @@ const SingleMovie = ({movie}) => {
           <p className="truncate">{genre}</p>
         </div>
 
-        {/* Details Button */}
-        <Link to={`/details/${_id}`}
-          className="
-            w-full
-            flex items-center justify-center
-            bg-red-600 hover:bg-red-700
-            text-white font-semibold
-            py-2 px-4
-            rounded-lg
-            transition duration-200
-            shadow-md shadow-red-500/30
-            cursor-pointer
-          "
-        >
-          View Details
-        </Link>
+        <div className='flex justify-between gap-2'>
+          <button onClick={handleWatchList}
+          className='w-full bg-red-600 hover:bg-red-700
+              text-center
+              text-white font-semibold
+              py-2 px-4
+              rounded-lg
+              transition duration-200
+              shadow-md shadow-red-500/30
+              cursor-pointer'>
+              Add To WatchList
+          </button>
+          {/* Details Button */}
+          <Link to={`/details/${_id}`}
+            className=" w-full text-center
+              bg-red-600 hover:bg-red-700
+              text-white font-semibold
+              py-2 px-4
+              rounded-lg
+              transition duration-200
+              shadow-md shadow-red-500/30
+              cursor-pointer
+              flex items-center
+            "
+          >
+            View Details
+          </Link>
+        </div>
       </div>
     </div>
     );

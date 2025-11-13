@@ -49,9 +49,9 @@ const MyCollections = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className='mt-20 min-h-165 max-w-[1652px] mx-auto'>
+            <div className='mt-20 min-h-117 max-w-[1652px] mx-auto'>
                 {
-                    loading? <Loading></Loading>:<div className='grid grid-cols-1 md:grid-cols-5 gap-5'>
+                    loading? <Loading></Loading>:<div className='grid grid-cols-1 md:grid-cols-5 gap-5 mb-20'>
                     {
                         movies.map(movie=>
                             <div 

@@ -16,6 +16,7 @@ import AddMovies from './Pages/AddMovies/AddMovies';
 import Update from './Pages/Update/Update';
 import ErrorPage from './Pages/ErrorPage/ErrorPage';
 import ErrorBoundary from './Pages/ErrorPage/ErrorBoundary';
+import WatchList from './Pages/WatchList/WatchList';
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
   {
     path:'/register',
     Component:Register
+  },
+  {
+    path:'/watch',
+    loader:()=>fetch('http://localhost:3000/movies'),
+    element:<PrivateRoute><WatchList></WatchList></PrivateRoute>
   },
   {
     path:'/error',
